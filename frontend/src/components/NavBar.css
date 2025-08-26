@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #232323;
+  padding: 0 32px;
+  height: 72px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.navbar-logo img {
+  height: 48px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 32px;
+}
+
+.navbar-links a {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 8px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+.navbar-links a.active, .navbar-links a:hover {
+  color: #6fff57;
+  border-bottom: 2px solid #6fff57;
+} 

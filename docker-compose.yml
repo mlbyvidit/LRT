@@ -1,0 +1,89 @@
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lanesearch
+    ports:
+      - "5435:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8002:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/lanesearch
+      - SUPERSET_USERNAME=admin
+      - SUPERSET_PASSWORD=admin
+      - SUPERSET_HOST=http://superset:8088
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3003:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_API_URL=http://localhost:8002
+      - REACT_APP_AUTH0_DOMAIN=dev-przpg5z8yxolsos1.us.auth0.com
+      - REACT_APP_AUTH0_CLIENT_ID=4DYUyb6mHB8cemgBGvwWmtw4eF4a2UMH
+      - REACT_APP_AUTH0_AUDIENCE=https://api.lrt-direct-main.com
+    depends_on:
+      - backend
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  superset:
+    build: ./superset
+    ports:
+      - "8089:8088"
+    environment:
+      - SUPERSET_SECRET_KEY=your_secret_key
+      - SUPERSET_CONFIG_PATH=/app/pythonpath/superset_config.py
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/lanesearch
+    volumes:
+      - ./superset_config.py:/app/pythonpath/superset_config.py
+    depends_on:
+      - db
+      - redis
+
+  superset-worker:
+    build: ./superset
+    command: celery --app=superset.tasks.celery_app:app worker -Q async
+    environment:
+      - SUPERSET_SECRET_KEY=your_secret_key
+      - SUPERSET_CONFIG_PATH=/app/pythonpath/superset_config.py
+    volumes:
+      - ./superset_config.py:/app/pythonpath/superset_config.py
+    depends_on:
+      - redis
+
+  superset-init:
+    build: ./superset
+    command: >
+      bash -c "
+        superset db upgrade &&
+        superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin &&
+        superset init
+      "
+    environment:
+      - SUPERSET_SECRET_KEY=your_secret_key
+      - SUPERSET_CONFIG_PATH=/app/pythonpath/superset_config.py
+    volumes:
+      - ./superset_config.py:/app/pythonpath/superset_config.py
+    depends_on:
+      - db
+
+volumes:
+  pgdata:

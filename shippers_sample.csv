@@ -1,0 +1,101 @@
+shipper,origin_city,origin_state,origin_zip,destination_city,destination_state,destination_zip,volume
+Shipper 1,Chicago,IL,60601,Dallas,TX,75201,23
+Shipper 1,Dallas,TX,75201,St. Louis,MO,63101,6
+Shipper 1,Atlanta,GA,30301,Chicago,IL,60601,7
+Shipper 1,Chicago,IL,60601,Atlanta,GA,30301,17
+Shipper 1,Atlanta,GA,30301,St. Louis,MO,63101,13
+Shipper 1,St. Louis,MO,63101,Chicago,IL,60601,8
+Shipper 1,Houston,TX,77001,Chicago,IL,60601,14
+Shipper 1,Atlanta,GA,30301,Dallas,TX,75201,24
+Shipper 1,Houston,TX,77001,Dallas,TX,75201,22
+Shipper 1,Atlanta,GA,30301,Chicago,IL,60601,24
+Shipper 1,Dallas,TX,75201,St. Louis,MO,63101,15
+Shipper 1,St. Louis,MO,63101,Atlanta,GA,30301,30
+Shipper 1,Dallas,TX,75201,Houston,TX,77001,30
+Shipper 1,Atlanta,GA,30301,Houston,TX,77001,11
+Shipper 1,St. Louis,MO,63101,Atlanta,GA,30301,29
+Shipper 1,Atlanta,GA,30301,Dallas,TX,75201,24
+Shipper 1,Houston,TX,77001,St. Louis,MO,63101,16
+Shipper 1,Atlanta,GA,30301,Houston,TX,77001,11
+Shipper 1,St. Louis,MO,63101,Dallas,TX,75201,28
+Shipper 1,Houston,TX,77001,Chicago,IL,60601,12
+Shipper 2,Atlanta,GA,30301,Dallas,TX,75201,24
+Shipper 2,St. Louis,MO,63101,Houston,TX,77001,23
+Shipper 2,Dallas,TX,75201,Atlanta,GA,30301,14
+Shipper 2,St. Louis,MO,63101,Houston,TX,77001,21
+Shipper 2,Atlanta,GA,30301,Chicago,IL,60601,28
+Shipper 2,Houston,TX,77001,Chicago,IL,60601,15
+Shipper 2,Chicago,IL,60601,Atlanta,GA,30301,23
+Shipper 2,St. Louis,MO,63101,Atlanta,GA,30301,14
+Shipper 2,St. Louis,MO,63101,Houston,TX,77001,28
+Shipper 2,Dallas,TX,75201,Houston,TX,77001,22
+Shipper 2,Dallas,TX,75201,Houston,TX,77001,30
+Shipper 2,Atlanta,GA,30301,Houston,TX,77001,15
+Shipper 2,Houston,TX,77001,St. Louis,MO,63101,7
+Shipper 2,St. Louis,MO,63101,Atlanta,GA,30301,6
+Shipper 2,St. Louis,MO,63101,Chicago,IL,60601,5
+Shipper 2,St. Louis,MO,63101,Chicago,IL,60601,22
+Shipper 2,St. Louis,MO,63101,Houston,TX,77001,17
+Shipper 2,St. Louis,MO,63101,Chicago,IL,60601,24
+Shipper 2,St. Louis,MO,63101,Atlanta,GA,30301,21
+Shipper 2,Houston,TX,77001,St. Louis,MO,63101,26
+Shipper 3,St. Louis,MO,63101,Houston,TX,77001,22
+Shipper 3,Chicago,IL,60601,Houston,TX,77001,30
+Shipper 3,St. Louis,MO,63101,Dallas,TX,75201,20
+Shipper 3,Dallas,TX,75201,Atlanta,GA,30301,21
+Shipper 3,Houston,TX,77001,Chicago,IL,60601,13
+Shipper 3,Houston,TX,77001,Chicago,IL,60601,20
+Shipper 3,Houston,TX,77001,Dallas,TX,75201,6
+Shipper 3,Houston,TX,77001,Atlanta,GA,30301,16
+Shipper 3,St. Louis,MO,63101,Houston,TX,77001,26
+Shipper 3,St. Louis,MO,63101,Chicago,IL,60601,13
+Shipper 3,Atlanta,GA,30301,Houston,TX,77001,10
+Shipper 3,Chicago,IL,60601,Dallas,TX,75201,9
+Shipper 3,Atlanta,GA,30301,Chicago,IL,60601,19
+Shipper 3,Chicago,IL,60601,St. Louis,MO,63101,10
+Shipper 3,Atlanta,GA,30301,Dallas,TX,75201,10
+Shipper 3,Dallas,TX,75201,St. Louis,MO,63101,30
+Shipper 3,St. Louis,MO,63101,Houston,TX,77001,27
+Shipper 3,Chicago,IL,60601,St. Louis,MO,63101,11
+Shipper 3,Houston,TX,77001,Dallas,TX,75201,18
+Shipper 3,Atlanta,GA,30301,Dallas,TX,75201,20
+Shipper 4,Dallas,TX,75201,St. Louis,MO,63101,27
+Shipper 4,Dallas,TX,75201,St. Louis,MO,63101,7
+Shipper 4,Houston,TX,77001,Dallas,TX,75201,23
+Shipper 4,Atlanta,GA,30301,St. Louis,MO,63101,17
+Shipper 4,Houston,TX,77001,St. Louis,MO,63101,7
+Shipper 4,Dallas,TX,75201,Houston,TX,77001,30
+Shipper 4,Atlanta,GA,30301,Houston,TX,77001,16
+Shipper 4,Chicago,IL,60601,Houston,TX,77001,8
+Shipper 4,Atlanta,GA,30301,Dallas,TX,75201,7
+Shipper 4,St. Louis,MO,63101,Dallas,TX,75201,17
+Shipper 4,Dallas,TX,75201,St. Louis,MO,63101,15
+Shipper 4,St. Louis,MO,63101,Dallas,TX,75201,17
+Shipper 4,St. Louis,MO,63101,Dallas,TX,75201,28
+Shipper 4,St. Louis,MO,63101,Chicago,IL,60601,5
+Shipper 4,Atlanta,GA,30301,Chicago,IL,60601,29
+Shipper 4,St. Louis,MO,63101,Chicago,IL,60601,23
+Shipper 4,Houston,TX,77001,St. Louis,MO,63101,22
+Shipper 4,Atlanta,GA,30301,St. Louis,MO,63101,22
+Shipper 4,Houston,TX,77001,Chicago,IL,60601,24
+Shipper 4,Dallas,TX,75201,St. Louis,MO,63101,5
+Shipper 5,Chicago,IL,60601,St. Louis,MO,63101,25
+Shipper 5,Chicago,IL,60601,Atlanta,GA,30301,13
+Shipper 5,Chicago,IL,60601,Houston,TX,77001,18
+Shipper 5,Houston,TX,77001,Dallas,TX,75201,16
+Shipper 5,St. Louis,MO,63101,Dallas,TX,75201,19
+Shipper 5,St. Louis,MO,63101,Dallas,TX,75201,21
+Shipper 5,Dallas,TX,75201,St. Louis,MO,63101,5
+Shipper 5,Dallas,TX,75201,St. Louis,MO,63101,25
+Shipper 5,St. Louis,MO,63101,Houston,TX,77001,24
+Shipper 5,Atlanta,GA,30301,Houston,TX,77001,27
+Shipper 5,Atlanta,GA,30301,St. Louis,MO,63101,15
+Shipper 5,Dallas,TX,75201,Chicago,IL,60601,23
+Shipper 5,Atlanta,GA,30301,St. Louis,MO,63101,18
+Shipper 5,Atlanta,GA,30301,Houston,TX,77001,20
+Shipper 5,St. Louis,MO,63101,Dallas,TX,75201,14
+Shipper 5,Chicago,IL,60601,Atlanta,GA,30301,27
+Shipper 5,Atlanta,GA,30301,Dallas,TX,75201,23
+Shipper 5,St. Louis,MO,63101,Dallas,TX,75201,30
+Shipper 5,Dallas,TX,75201,Chicago,IL,60601,17
+Shipper 5,St. Louis,MO,63101,Dallas,TX,75201,19

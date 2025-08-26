@@ -1,0 +1,26 @@
+carrier,origin_city,origin_state,origin_zip,destination_city,destination_state,destination_zip,capacity
+Carrier 1,Atlanta,GA,30301,St. Louis,MO,63101,25
+Carrier 1,Houston,TX,77001,Chicago,IL,60601,17
+Carrier 1,Atlanta,GA,30301,Chicago,IL,60601,32
+Carrier 1,Atlanta,GA,30301,Chicago,IL,60601,32
+Carrier 2,St. Louis,MO,63101,Houston,TX,77001,18
+Carrier 2,Houston,TX,77001,Dallas,TX,75201,34
+Carrier 2,Atlanta,GA,30301,Houston,TX,77001,13
+Carrier 3,Chicago,IL,60601,Atlanta,GA,30301,30
+Carrier 3,Dallas,TX,75201,Houston,TX,77001,24
+Carrier 3,Atlanta,GA,30301,Dallas,TX,75201,14
+Carrier 3,Atlanta,GA,30301,St. Louis,MO,63101,19
+Carrier 4,Chicago,IL,60601,Houston,TX,77001,15
+Carrier 4,Houston,TX,77001,Dallas,TX,75201,18
+Carrier 4,Houston,TX,77001,Dallas,TX,75201,15
+Carrier 5,Houston,TX,77001,Dallas,TX,75201,34
+Carrier 5,Atlanta,GA,30301,Dallas,TX,75201,14
+Carrier 5,St. Louis,MO,63101,Atlanta,GA,30301,15
+Carrier 6,Chicago,IL,60601,St. Louis,MO,63101,17
+Carrier 6,Chicago,IL,60601,Dallas,TX,75201,32
+Carrier 6,St. Louis,MO,63101,Houston,TX,77001,24
+Carrier 6,Dallas,TX,75201,Atlanta,GA,30301,32
+Carrier 7,Chicago,IL,60601,Houston,TX,77001,30
+Carrier 7,Atlanta,GA,30301,Dallas,TX,75201,40
+Carrier 7,Dallas,TX,75201,St. Louis,MO,63101,17
+Carrier 7,Chicago,IL,60601,St. Louis,MO,63101,37

@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+psycopg2-binary
+SQLAlchemy
+requests
+python-dotenv
+dotenv
+# Force rebuild 2025-08-07-16
+pandas
+PyJWT
+python-multipart

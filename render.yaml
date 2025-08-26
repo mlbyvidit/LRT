@@ -1,0 +1,110 @@
+services:
+  - type: web
+    name: lrt-direct-backend
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lanesearch
+          property: connectionString
+      - key: SUPERSET_USERNAME
+        value: admin
+      - key: SUPERSET_PASSWORD
+        value: admin
+      - key: SUPERSET_HOST
+        value: http://superset-web:8088
+
+  - type: web
+    name: lrt-direct
+    env: node
+    buildCommand: |
+      cd frontend
+      npm install
+      npm install -g serve
+      npm run build
+    startCommand: cd frontend && serve -s build -l $PORT
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://lrt-direct-backend.onrender.com
+      - key: REACT_APP_AUTH0_DOMAIN
+        value: dev-przpg5z8yxolsos1.us.auth0.com
+      - key: REACT_APP_AUTH0_CLIENT_ID
+        value: 4DYUyb6mHB8cemgBGvwWmtw4eF4a2UMH
+      - key: REACT_APP_AUTH0_AUDIENCE
+        value: https://api.lrt-direct-main.com
+
+  - type: web
+    name: redis-server
+    env: docker
+    dockerfilePath: ./Dockerfile
+    startCommand: redis-server
+    healthCheckPath: /ping
+    autoDeploy: true
+
+  - type: web
+    name: superset-web
+    env: docker
+    dockerfilePath: ./superset/Dockerfile
+    startCommand: gunicorn -b 0.0.0.0:8088 --access-logfile - --error-logfile - --log-level info superset:app
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: SUPERSET_SECRET_KEY
+        value: your_secret_key
+      - key: SUPERSET_CONFIG_PATH
+        value: /app/pythonpath/superset_config.py
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lanesearch
+          property: connectionString
+      - key: CACHE_REDIS_URL
+        value: redis://redis-server:6379/0
+      - key: FEATURE_FLAGS
+        value: '{"EMBEDDED_SUPERSET": true}'
+
+  - type: worker
+    name: superset-worker
+    env: docker
+    dockerfilePath: ./superset/Dockerfile
+    startCommand: celery --app=superset.tasks.celery_app:app worker -Q async
+    autoDeploy: true
+    envVars:
+      - key: SUPERSET_SECRET_KEY
+        value: your_secret_key
+      - key: SUPERSET_CONFIG_PATH
+        value: /app/pythonpath/superset_config.py
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lanesearch
+          property: connectionString
+      - key: CACHE_REDIS_URL
+        value: redis://redis-server:6379/0
+      - key: FEATURE_FLAGS
+        value: '{"EMBEDDED_SUPERSET": true}'
+
+  - type: job
+    name: superset-init-job
+    env: docker
+    dockerfilePath: ./superset/Dockerfile
+    startCommand: bash -c "superset db upgrade && superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin && superset init"
+    autoDeploy: false # Run manually once
+    envVars:
+      - key: SUPERSET_SECRET_KEY
+        value: your_secret_key
+      - key: SUPERSET_CONFIG_PATH
+        value: /app/pythonpath/superset_config.py
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lanesearch
+          property: connectionString
+      - key: CACHE_REDIS_URL
+        value: redis://redis-server:6379/0
+      - key: FEATURE_FLAGS
+        value: '{"EMBEDDED_SUPERSET": true}'
+
+databases:
+  - name: lanesearch
+    databaseName: lanesearch
+    user: lanesearch 

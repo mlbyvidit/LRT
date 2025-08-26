@@ -1,0 +1,80 @@
+dashboard_title: LRT Dashboard
+description: null
+css: null
+slug: null
+certified_by: null
+certification_details: null
+published: false
+uuid: e35c71a0-08e9-4f66-8f26-4a832d53c83f
+metadata:
+  chart_configuration:
+    '1':
+      id: 1
+      crossFilters:
+        scope: global
+        chartsInScope: []
+  global_chart_configuration:
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    chartsInScope:
+    - 1
+  map_label_colors:
+    TX: '#1FA8C9'
+    GA: '#454E7C'
+    IL: '#5AC189'
+    MO: '#FF7F44'
+  timed_refresh_immune_slices: []
+  expanded_slices: {}
+  refresh_frequency: 0
+  color_scheme: ''
+  label_colors: {}
+  shared_label_colors: []
+  color_scheme_domain: []
+  cross_filters_enabled: true
+position:
+  DASHBOARD_VERSION_KEY: v2
+  ROOT_ID:
+    children:
+    - GRID_ID
+    id: ROOT_ID
+    type: ROOT
+  GRID_ID:
+    children:
+    - ROW-N-7P1FI576
+    id: GRID_ID
+    parents:
+    - ROOT_ID
+    type: GRID
+  HEADER_ID:
+    id: HEADER_ID
+    meta:
+      text: LRT Dashboard
+    type: HEADER
+  ROW-N-7P1FI576:
+    children:
+    - CHART-YV6YOE3W
+    id: ROW-N-7P1FI576
+    meta:
+      '0': ROOT_ID
+      background: BACKGROUND_TRANSPARENT
+    type: ROW
+    parents:
+    - ROOT_ID
+    - GRID_ID
+  CHART-YV6YOE3W:
+    children: []
+    id: CHART-YV6YOE3W
+    meta:
+      chartId: 1
+      height: 50
+      sliceName: carrier_count
+      uuid: 5bf2af68-540f-4ce6-84df-29971e9d4213
+      width: 4
+    type: CHART
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - ROW-N-7P1FI576
+version: 1.0.0
