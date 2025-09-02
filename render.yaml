@@ -84,27 +84,13 @@ services:
       - key: FEATURE_FLAGS
         value: '{"EMBEDDED_SUPERSET": true}'
 
-  - type: job
-    name: superset-init-job
-    env: docker
-    dockerfilePath: ./superset/Dockerfile
-    startCommand: bash -c "superset db upgrade && superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin && superset init"
-    autoDeploy: false # Run manually once
-    envVars:
-      - key: SUPERSET_SECRET_KEY
-        value: your_secret_key
-      - key: SUPERSET_CONFIG_PATH
-        value: /app/pythonpath/superset_config.py
-      - key: DATABASE_URL
-        fromDatabase:
-          name: lanesearch
-          property: connectionString
-      - key: CACHE_REDIS_URL
-        value: redis://redis-server:6379/0
-      - key: FEATURE_FLAGS
-        value: '{"EMBEDDED_SUPERSET": true}'
+# Note: Superset initialization will need to be done manually after deployment
+# Run these commands in the superset-web service shell:
+# superset db upgrade
+# superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin
+# superset init
 
 databases:
   - name: lanesearch
     databaseName: lanesearch
-    user: lanesearch 
+    user: lanesearch
