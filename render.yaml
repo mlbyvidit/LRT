@@ -35,19 +35,15 @@ services:
       - key: REACT_APP_AUTH0_AUDIENCE
         value: https://api.lrt-direct-main.com
 
-  - type: web
+  - type: redis
     name: redis-server
-    env: docker
-    dockerfilePath: ./Dockerfile
-    startCommand: redis-server
-    healthCheckPath: /ping
-    autoDeploy: true
+    ipAllowList: []
+    plan: starter
 
   - type: web
     name: superset-web
     env: docker
     dockerfilePath: ./superset/Dockerfile
-    startCommand: gunicorn -b 0.0.0.0:8088 --access-logfile - --error-logfile - --log-level info superset:app
     healthCheckPath: /health
     autoDeploy: true
     envVars:
@@ -60,7 +56,10 @@ services:
           name: lanesearch
           property: connectionString
       - key: CACHE_REDIS_URL
-        value: redis://redis-server:6379/0
+        fromService:
+          type: redis
+          name: redis-server
+          property: connectionString
       - key: FEATURE_FLAGS
         value: '{"EMBEDDED_SUPERSET": true}'
 
@@ -68,7 +67,6 @@ services:
     name: superset-worker
     env: docker
     dockerfilePath: ./superset/Dockerfile
-    startCommand: celery --app=superset.tasks.celery_app:app worker -Q async
     autoDeploy: true
     envVars:
       - key: SUPERSET_SECRET_KEY
@@ -80,7 +78,10 @@ services:
           name: lanesearch
           property: connectionString
       - key: CACHE_REDIS_URL
-        value: redis://redis-server:6379/0
+        fromService:
+          type: redis
+          name: redis-server
+          property: connectionString
       - key: FEATURE_FLAGS
         value: '{"EMBEDDED_SUPERSET": true}'
 
