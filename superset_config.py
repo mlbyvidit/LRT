@@ -15,13 +15,13 @@ CACHE_CONFIG = {
     'CACHE_TYPE': 'redis',
     'CACHE_DEFAULT_TIMEOUT': 300,
     'CACHE_KEY_PREFIX': 'superset_',
-    'CACHE_REDIS_URL': 'redis://redis:6379/0',
+    'CACHE_REDIS_URL': os.environ.get('CACHE_REDIS_URL', 'redis://redis:6379/0'),
 }
 
 CELERY_CONFIG = {
-    'broker_url': 'redis://redis:6379/0',
+    'broker_url': os.environ.get('CACHE_REDIS_URL', 'redis://redis:6379/0'),
     'imports': ('superset.sql_lab',),
-    'result_backend': 'redis://redis:6379/0',
+    'result_backend': os.environ.get('CACHE_REDIS_URL', 'redis://redis:6379/0'),
     'worker_prefetch_multiplier': 1,
     'task_acks_late': False,
     'task_track_started': True,

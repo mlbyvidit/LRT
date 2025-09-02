@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
+  { to: "/", label: "Dashboard" },
   { to: "/carriers", label: "Carrier Home" },
   { to: "/shippers", label: "Shipper Home" },
   { to: "/geo", label: "Geo Data" },

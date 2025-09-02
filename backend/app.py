@@ -16,7 +16,7 @@ app = FastAPI()
 # Allow CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with your frontend URL
+    allow_origins=["https://lrt-direct.onrender.com", "http://localhost:3003"],  # Production and local URLs
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -28,7 +28,7 @@ class GuestTokenRequest(BaseModel):
 # Superset credentials from environment variables
 SUPERSET_USERNAME = os.environ.get("SUPERSET_USERNAME", "admin")
 SUPERSET_PASSWORD = os.environ.get("SUPERSET_PASSWORD", "admin")
-SUPERSET_HOST = os.environ.get("SUPERSET_HOST", "http://superset:8088") # Use internal Docker service name
+SUPERSET_HOST = os.environ.get("SUPERSET_HOST", "https://superset-web.onrender.com") # Use Render URL in production
 
 async def get_superset_access_token():
     login_data = {
