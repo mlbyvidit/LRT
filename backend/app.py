@@ -9,9 +9,108 @@ from models import Carrier, Shipper, GeoData
 import os
 import requests
 import json
+import csv
+from pathlib import Path
 
 Base.metadata.create_all(bind=engine)
+
+# Load sample data on startup
+def load_sample_data():
+    db = SessionLocal()
+    try:
+        # Check if data already exists
+        if db.query(Carrier).count() > 0:
+            print("Data already loaded, skipping...")
+            return
+        
+        print("Loading sample data...")
+        
+        # Load carriers
+        carriers_file = Path("carrier_samples.csv")
+        if carriers_file.exists():
+            with open(carriers_file, 'r') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    carrier = Carrier(
+                        carrier=row['carrier'],
+                        origin_city=row['origin_city'],
+                        origin_state=row['origin_state'],
+                        origin_zip=row['origin_zip'],
+                        destination_city=row['destination_city'],
+                        destination_state=row['destination_state'],
+                        destination_zip=row['destination_zip'],
+                        capacity=int(row['capacity'])
+                    )
+                    db.add(carrier)
+        
+        # Load shippers
+        shippers_file = Path("shippers_sample.csv")
+        if shippers_file.exists():
+            with open(shippers_file, 'r') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    shipper = Shipper(
+                        shipper=row['shipper'],
+                        origin_city=row['origin_city'],
+                        origin_state=row['origin_state'],
+                        origin_zip=row['origin_zip'],
+                        destination_city=row['destination_city'],
+                        destination_state=row['destination_state'],
+                        destination_zip=row['destination_zip'],
+                        volume=int(row['volume'])
+                    )
+                    db.add(shipper)
+        
+        # Load postal codes (first 100 rows to avoid overwhelming)
+        postal_file = Path("postal_codes.csv")
+        if postal_file.exists():
+            with open(postal_file, 'r') as file:
+                reader = csv.DictReader(file)
+                count = 0
+                for row in reader:
+                    if count >= 100:  # Limit to first 100 rows
+                        break
+                    geo_data = GeoData(
+                        country=row.get('country', ''),
+                        postal_code=row.get('postal_code', ''),
+                        lat=float(row['lat']) if row.get('lat') else None,
+                        lng=float(row['lng']) if row.get('lng') else None,
+                        city=row.get('city', ''),
+                        state_code=row.get('state_code', ''),
+                        state_name=row.get('state_name', ''),
+                        zcta=row.get('zcta', ''),
+                        parent_zcta=row.get('parent_zcta', ''),
+                        population=row.get('population', ''),
+                        density=row.get('density', ''),
+                        county_fips=row.get('county_fips', ''),
+                        county_name=row.get('county_name', ''),
+                        county_weights=row.get('county_weights', ''),
+                        county_names_all=row.get('county_names_all', ''),
+                        county_fips_all=row.get('county_fips_all', ''),
+                        imprecise=row.get('imprecise', ''),
+                        military=row.get('military', ''),
+                        timezone=row.get('timezone', ''),
+                        region=row.get('region', ''),
+                        market=row.get('market', '')
+                    )
+                    db.add(geo_data)
+                    count += 1
+        
+        db.commit()
+        print("Sample data loaded successfully!")
+        
+    except Exception as e:
+        print(f"Error loading sample data: {e}")
+        db.rollback()
+    finally:
+        db.close()
+
 app = FastAPI()
+
+# Load data on startup
+@app.on_event("startup")
+async def startup_event():
+    load_sample_data()
 
 # Allow CORS for frontend
 app.add_middleware(
