@@ -2,8 +2,8 @@ import React from "react";
 import StyledCard from "../components/StyledCard";
 
 export default function Dashboard() {
-  // Direct embed without guest token - using Render hosted Superset
-  const supersetHost = "https://superset-web.onrender.com";
+  // Direct embed without guest token - using your deployed Superset service
+  const supersetHost = "https://superset-web-9bo9.onrender.com";
   
   // Dashboard UUID from the new dashboard export
   const dashboardUuid = "59c44a63-edb6-4b5f-be99-da4c6333d037";
